@@ -2,13 +2,14 @@ package pe.upc.vacappbackend.iam.interfaces.rest;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.upc.vacappbackend.iam.application.internal.commandservices.UserCommandServiceImpl;
+import pe.upc.vacappbackend.iam.application.internal.queryservices.UserQueryServiceImpl;
 import pe.upc.vacappbackend.iam.domain.model.aggregates.User;
 import pe.upc.vacappbackend.iam.domain.model.commands.DeleteUserCommand;
 import pe.upc.vacappbackend.iam.domain.model.queries.GetUserByIdQuery;
-import pe.upc.vacappbackend.iam.domain.services.UserCommandService;
-import pe.upc.vacappbackend.iam.domain.services.UserQueryService;
 import pe.upc.vacappbackend.iam.interfaces.rest.resources.CreateUserResource;
 import pe.upc.vacappbackend.iam.interfaces.rest.resources.UserResource;
 import pe.upc.vacappbackend.iam.interfaces.rest.transform.CreateUserCommandFromResourceAssembler;
@@ -20,10 +21,10 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping(value = "/api/v1/users", produces = APPLICATION_JSON_VALUE)
 @Tag(name = "User", description = "Available User Endpoints")
 public class UserController {
-    private final UserCommandService userCommandService;
-    private final UserQueryService userQueryService;
+    private final UserCommandServiceImpl userCommandService;
+    private final UserQueryServiceImpl userQueryService;
 
-    public UserController(UserCommandService userCommandService, UserQueryService userQueryService) {
+    public UserController(UserCommandServiceImpl userCommandService, UserQueryServiceImpl userQueryService) {
         this.userCommandService = userCommandService;
         this.userQueryService = userQueryService;
     }
