@@ -32,14 +32,11 @@ public class UserController {
     @PostMapping
     @Operation(summary = "Create a User", description = "Create a User")
     public ResponseEntity<User> createUser(@RequestBody CreateUserResource resource) {
-        try {
             var createUserCommand = CreateUserCommandFromResourceAssembler.toCommandFromResource(resource);
             var createdUser = userCommandService.handle(createUserCommand)
                     .orElseThrow(() -> new IllegalArgumentException("Error creating user"));
             return ResponseEntity.status(201).body(createdUser);
-        } catch (IllegalArgumentException ex) {
-            return ResponseEntity.status(400).body(null);
-        }
+
     }
 
     @DeleteMapping("{userId}")

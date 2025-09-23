@@ -1,9 +1,12 @@
 package pe.upc.vacappbackend.iam.domain.model.aggregates;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.Setter;
 import pe.upc.vacappbackend.iam.domain.model.commands.CreateUserCommand;
+import pe.upc.vacappbackend.iam.domain.model.valueobjects.Role;
 import pe.upc.vacappbackend.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 
 @Getter
@@ -16,13 +19,14 @@ public class User extends AuditableAbstractAggregateRoot<User> {
     @Setter
     private String email;
     @Setter
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     public User() {
         this.username = "";
         this.password = "";
         this.email = "";
-        this.role = "USER"; // Default role
+        this.role = Role.USER; // Default role
     }
 
     public User(CreateUserCommand command) {

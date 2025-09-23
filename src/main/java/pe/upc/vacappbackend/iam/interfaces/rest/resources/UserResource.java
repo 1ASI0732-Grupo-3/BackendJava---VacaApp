@@ -1,11 +1,13 @@
 package pe.upc.vacappbackend.iam.interfaces.rest.resources;
 
+import pe.upc.vacappbackend.iam.domain.model.valueobjects.Role;
+
 public record UserResource(
     Long id,
     String username,
     String email,
     String password,
-    String role
+    Role role
 ) {
     public UserResource {
         if (id == null || id <= 0) {
@@ -20,8 +22,8 @@ public record UserResource(
         if (password == null || password.isBlank()) {
             throw new IllegalArgumentException("Password cannot be null or blank.");
         }
-        if (role == null || role.isBlank()) {
-            throw new IllegalArgumentException("Role cannot be null or blank.");
+        if (role == null) {
+            throw new IllegalArgumentException("Role cannot be null.");
         }
     }
 }

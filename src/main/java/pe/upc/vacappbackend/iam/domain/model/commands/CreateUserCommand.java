@@ -1,10 +1,12 @@
 package pe.upc.vacappbackend.iam.domain.model.commands;
 
+import pe.upc.vacappbackend.iam.domain.model.valueobjects.Role;
+
 public record CreateUserCommand(
     String username,
     String password,
     String email,
-    String role
+    Role role
 ) {
     public CreateUserCommand {
         if (username == null || username.isBlank()) {
@@ -16,8 +18,8 @@ public record CreateUserCommand(
         if (email == null || email.isBlank()) {
             throw new IllegalArgumentException("Email cannot be null or blank.");
         }
-        if (role == null || role.isBlank()) {
-            throw new IllegalArgumentException("Role cannot be null or blank.");
+        if (role == null) {
+            throw new IllegalArgumentException("Role cannot be null.");
         }
     }
 }
