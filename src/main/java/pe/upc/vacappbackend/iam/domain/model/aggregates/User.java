@@ -10,15 +10,12 @@ import pe.upc.vacappbackend.iam.domain.model.valueobjects.Role;
 import pe.upc.vacappbackend.shared.domain.model.aggregates.AuditableAbstractAggregateRoot;
 
 @Getter
+@Setter
 @Entity
 public class User extends AuditableAbstractAggregateRoot<User> {
-    @Setter
     private String username;
-    @Setter
     private String password;
-    @Setter
     private String email;
-    @Setter
     @Enumerated(EnumType.STRING)
     private Role role;
 
