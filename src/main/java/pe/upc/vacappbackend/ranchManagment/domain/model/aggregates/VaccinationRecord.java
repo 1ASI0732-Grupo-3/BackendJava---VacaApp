@@ -18,6 +18,14 @@ public class VaccinationRecord extends AuditableAbstractAggregateRoot<Vaccinatio
     private String vaccineImg;
     private Long bovineId;
 
+    public VaccinationRecord() {
+        this.name = "Vaccination Record";
+        this.vaccineType="Vaccination";
+        this.vaccineDate = new Date();
+        this.vaccineImg = "No image";
+        this.bovineId = 0L;
+    }
+
     public VaccinationRecord(CreateVaccinationCommand command) {
         this.name = command.name();
         this.vaccineType = command.vaccineType();
